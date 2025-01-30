@@ -44,7 +44,7 @@ const JobSchema= new mongoose.Schema({
     },
     applications:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'Application'
     }]
 },{timestamps:true})
 
