@@ -26,11 +26,13 @@ function Login() {
           <label>Email</label>
           <input className='p-1 rounded-sm bg-slate-100' 
             name="email"
+            value={input.email}
             onChange={changeEventHandler}
           type="text" placeholder="rahul@gmail.com" />
           <label>Password</label>
           <input className='p-1 rounded-sm bg-slate-100'
             name="password"
+            value={input.password}
             onChange={changeEventHandler}
           type="password" placeholder="password" />
           <div className='flex gap-2 flex-wrap'>

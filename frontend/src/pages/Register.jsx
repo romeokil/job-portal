@@ -31,21 +31,25 @@ function Register() {
           <label>Full Name</label>
           <input className='p-1 rounded-sm bg-slate-100'
             name="name"
+            value={input.name}
             onChange={changeEventHandler}
            type="text" placeholder="rahul" />
           <label>Email</label>
           <input className='p-1 rounded-sm bg-slate-100' 
              name="email"
+             value={input.email}
              onChange={changeEventHandler}
           type="text" placeholder="rahul@gmail.com" />
           <label>Phone Number</label>
           <input className='p-1 rounded-sm bg-slate-100'
              name="phonenumber"
+             value={input.phonenumber}
              onChange={changeEventHandler}
           type="text" placeholder="989987898" />
           <label>Password</label>
           <input className='p-1 rounded-sm bg-slate-100'
              name="password"
+             value={input.password}
              onChange={changeEventHandler}
           type="password" placeholder="password" />
           <div className='flex gap-2 flex-wrap'>
