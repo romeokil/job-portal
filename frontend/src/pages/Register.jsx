@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 function Register() {
+  const [loading,setloading]=useState(false);
   const [input,setinput]=useState({
     name:"",
     email:"",
@@ -18,9 +19,31 @@ function Register() {
     setinput({...input,file:e.target.files?.[0]});
   }
 
-  const onSubmitHandler=(e)=>{
+  const onSubmitHandler=async(e)=>{
     e.preventDefault();
     console.log(input);
+    const formdata=new FormData();
+    formdata.append('name',input.name);
+    formdata.append('email',input.email);
+    formdata.append('phonenumber',input.phonenumber)
+    formdata.append('password',input.password);
+    formdata.append('role',input.role);
+    if(input.file) formdata.append('file',input.file);
+    try{
+      setloading(true);
+      const res=await fetch(`http://localhost:8000/api/user/register`,{
+        method:POST,
+        body:formdata,
+      })
+      const response=await res.json();
+      console.log(response);
+    }
+    catch(error){
+      console.log("Error while registering user",error);
+    }
+    finally{
+      setloading(false);
+    }
   }
   return (
     <div>
