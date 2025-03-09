@@ -13,9 +13,9 @@ function Navbar() {
                 </div>
                 <div className='flex gap-4 p-2'>
                     <ul className='flex gap-3 p-1'>
-                        <li className='text-lg text-slate-600 font-semibold'>Home</li>
-                        <li className='text-lg text-slate-600 font-semibold'>Jobs</li>
-                        <li className='text-lg text-slate-600 font-semibold'>Browse</li>
+                        <li className='text-lg text-slate-600 font-semibold'> <Link to='/'>Home</Link></li>
+                        <li className='text-lg text-slate-600 font-semibold'><Link to="/job">Jobs</Link></li>
+                        <li className='text-lg text-slate-600 font-semibold'><Link to="/browse">Browse</Link></li>
                     </ul>
                     {
                         !user ? (
