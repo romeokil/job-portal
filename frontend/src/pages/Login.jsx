@@ -1,7 +1,10 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar.jsx'
+import { login } from '../redux/authslice.js'
+import { useDispatch } from 'react-redux'
 function Login() {
+  const dispatch=useDispatch();
   const [input,setinput]=useState({
     email:"",
     password:"",
@@ -12,8 +15,27 @@ function Login() {
     setinput({...input,[e.target.name]:e.target.value})
   }
 
-  const submitHandler=(e)=>{
+  const submitHandler= async (e)=>{
     e.preventDefault();
+    console.log("login kr rhe hai input print",input);
+    try{
+      const response = await fetch(`http://localhost:8000/api/user/login`, {
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',  // Make sure credentials are included
+      });
+      if(response.ok){
+        let data=await response.json();
+        console.log("Login Successfull")
+        dispatch(login(data.checkuser));
+      }
+    }
+    catch(error){ 
+        console.log("Error while while calling login api calling",error);
+    }
     console.log(input)
   }
   return (
@@ -38,10 +60,10 @@ function Login() {
           <div className='flex gap-2 flex-wrap'>
             Applicant:<input className='p-1 rounded-sm bg-slate-100' type="radio" name="role" 
             onChange={changeEventHandler}
-            value="applicant" />
+            value="Applicant" />
             Recruiter:<input className='p-1 rounded-sm bg-slate-100' type="radio" name="role" 
             onChange={changeEventHandler}
-            value="recruiter" />
+            value="Recruiter" />
           </div>
           <button className='bg-black text-white p-1 rounded-md mt-1'>Login</button>
           <span>Don't have an Account ? <Link to='/register' className='text-slate-600 hover:text-blue-900 hover:text-lg hover:font-semibold'>Signup</Link></span>

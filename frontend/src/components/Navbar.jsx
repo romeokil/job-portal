@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Dropdown from './Dropdown.jsx';
 import Avatar from './Avatar.jsx';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
-    const [user, setuser] = useState(false);
+    const auth=useSelector((state)=>state.auth);
     return (
         <>
             <div className='w-4/5 mx-auto mt-2'>
@@ -20,10 +21,10 @@ function Navbar() {
                             <li><Link to='/browse'>Browse</Link></li>
                         </ul>
                         <div>
-                            {!user ?(
+                            {!auth.isAuthenticated?(
                                 <div className='flex flex-col sm:flex-row gap-1'>
-                                    <button className='bg-blue-400 text-white p-2 rounded-md'>Login</button>
-                                    <button className='bg-red-400 text-white p-2 rounded-md'>Register</button>
+                                    <Link to='/login' className='bg-blue-400 text-white p-2 rounded-md'>Login</Link>
+                                    <Link to='/register' className='bg-red-400 text-white p-2 rounded-md'>Register</Link>
                                 </div>
                             ):(
                                 <div className='flex gap-1 sm:gap-2'>
