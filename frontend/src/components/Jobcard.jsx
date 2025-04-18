@@ -1,7 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark } from "@fortawesome/free-regular-svg-icons"
 export default function Jobcard() {
+    const jobId='fasldjffasdfsadf';
     return (
         <div>
             <div className='w-full rounded-md border-2 border-slate-300 shadow-lg shadow-slate-500/50 p-2'>
@@ -26,7 +28,7 @@ export default function Jobcard() {
                     <p className='text-sm font-medium text-black border border-slate-200'>24 LPA</p>
                 </div>
                 <div className='flex gap-3'>
-                    <button className='text-slate-950 p-'>Details</button>
+                    <button className='text-slate-950 p-'><Link to={`/description/${jobId}`}>Details</Link></button>
                     <button className='text-white bg-blue-500 p-2 rounded-md text-sm'>Save for later</button>
                 </div>
             </div>

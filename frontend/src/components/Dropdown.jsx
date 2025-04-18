@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,12 +24,12 @@ export default function Dropdown() {
       >
         <div className="py-1">
         <MenuItem>
-            <a
-              href="#"
+            <Link to='/profile'
+              
               className="block px-4 py-2 text-sm text-blue-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
             >
               View Profile
-            </a>
+            </Link>
           </MenuItem>
           <MenuItem>
             <a
