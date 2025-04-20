@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const ProfileDialog = ({ show, onClose }) => {
+  const user=useSelector((state)=>state.auth.user);
+  console.log(user);
+  const [userdata,setuserdata]=useState({
+    name:user?.name,
+    email:user?.email,
+    number:user?.phonenumber,
+    bio:user?.profile?.bio,
+    skills:user?.profile?.skills,
+    resume:user?.profile?.resume
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,16 +25,17 @@ const ProfileDialog = ({ show, onClose }) => {
   if (!show) return null;
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    });
+    setuserdata({...userdata,[e.target.name]:e.target.value})
   };
+
+  const handlefileChange=(e)=>{
+    const file=e.target.file?.[0];
+    setuserdata({...userdata,file})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    console.log(userdata);
     onClose(); // Close the dialog after updating
   };
 
@@ -41,6 +54,7 @@ const ProfileDialog = ({ show, onClose }) => {
           <input
             type="text"
             name="name"
+            value={userdata.name}
             placeholder="Name"
             className="w-full p-2 border rounded"
             onChange={handleChange}
@@ -48,6 +62,7 @@ const ProfileDialog = ({ show, onClose }) => {
           <input
             type="email"
             name="email"
+            value={userdata.email}
             placeholder="Email"
             className="w-full p-2 border rounded"
             onChange={handleChange}
@@ -55,6 +70,7 @@ const ProfileDialog = ({ show, onClose }) => {
           <input
             type="tel"
             name="number"
+            value={userdata.number}
             placeholder="Phone Number"
             className="w-full p-2 border rounded"
             onChange={handleChange}
@@ -64,21 +80,24 @@ const ProfileDialog = ({ show, onClose }) => {
             placeholder="Bio"
             rows="3"
             className="w-full p-2 border rounded"
+            value={userdata.bio}
             onChange={handleChange}
           ></textarea>
           <input
             type="text"
             name="skills"
+            value={userdata.skills}
             placeholder="Skills (comma separated)"
             className="w-full p-2 border rounded"
             onChange={handleChange}
           />
           <input
             type="file"
-            name="resume"
-            accept=".pdf,.doc,.docx"
+            name="file"
+            value={userdata.file?.[0]}
+            accept="application/pdf"
             className="w-full"
-            onChange={handleChange}
+            onChange={handlefileChange}
           />
           <button
             type="submit"
