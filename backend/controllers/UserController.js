@@ -89,7 +89,7 @@ export const login=async(req,res)=>{
         }
         // if all okay then we will create token
         console.log("JWT_SECRET->  ",process.env.JWT_SECRET)
-        let token=jwt.sign({id:checkuser._id},process.env.JWT_SECRET,{expiresIn:'1d'});
+        let token=jwt.sign({id:checkuser._id},process.env.JWT_SECRET,{expiresIn:'1h'});
         return res.status(201).cookie('token',token).json({
             "message":"You are Successfully logged in!!!",
             checkuser,
