@@ -1,4 +1,5 @@
 import express from 'express';
+import formidable from 'express-formidable'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
@@ -18,11 +19,38 @@ const corsOption = {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOption));
+// app.use(formidable()); 
 
+// app.post('/api/user/registration',(req,res)=>{
+//     console.log("register post request hai ye index.file me jo likha hua hai!")   
+//     const {name,email,password,phonenumber,role}=req.body;
+//     console.log("yes body ke andr ka data recieve hua!!");
+// })
 app.use('/api/user', UserRoute)
+// app.get('/api/user/newregister',(req,res)=>{
+//     console.log("new registration!!")
+//     const {name,email,password}=req.body;
+//     return res.status(201).json({
+//         "message":"congrats ye pehli route",
+//         "data":{
+//             name,email,password
+//         }
+//     })
+// })
+// app.post('/api/user/newregister',(req,res)=>{
+//     console.log("new registration!! post request")
+//     const {name,email,password}=req.body;
+//     return res.status(201).json({
+//         "message":"congrats ye pehli route",
+//         "data":{
+//             name,email,password
+//         }
+//     })
+// })
 app.use('/api/company', CompanyRoute);
 app.use('/api/jobs', JobRoute);
 app.use('/api/application',ApplicationRoute);
+
 
 app.get('/home', (req, res) => {
     res.status(201).json({
