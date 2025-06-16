@@ -1,9 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,} from 'react'
 import Navbar from '../components/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faMessage, faAddressBook } from "@fortawesome/free-regular-svg-icons"
 import Dialogbox from './Dialogbox.jsx'
+import { useSelector } from 'react-redux'
 function Profile() {
+    const user=useSelector((state)=>state.auth.user);
     let skills = ['HTML', 'CSS', 'JAVSCRIPT', 'REACT', 'NODEJS']
     const [showDialog, setShowDialog] = useState(false);
     return (
@@ -17,8 +19,8 @@ function Profile() {
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" alt="" />
                         </div>
                         <div>
-                            <h3>Full Name</h3>
-                            <p className='text-wrap'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, dolores.</p>
+                            <h3>{user?.name}</h3>
+                            <p className='text-wrap'>{user?.profile?.bio}</p>
                         </div>
                         {/* ye edit wala button ke liye div */}
                         <div>
@@ -31,15 +33,15 @@ function Profile() {
                     </div>
                     <div className='flex items-center gap-1'>
                         <FontAwesomeIcon icon={faMessage} />
-                        <p>rahul@gmail.com</p>
+                        <p>{user?.email}</p>
                     </div>
                     <div className='flex items-center gap-1'>
                         <FontAwesomeIcon icon={faAddressBook} />
-                        <p>9334417768</p>
+                        <p>{user?.phonenumber}</p>
                     </div>
                     <h2>Skills</h2>
                     <div className='flex flex-wrap gap-1 font-semibold'>
-                        {skills.map((skill, index) => (
+                        {user?.profile?.skills.map((skill, index) => (
                             <h3 key={index}>
                                 {skill}
                             </h3>
