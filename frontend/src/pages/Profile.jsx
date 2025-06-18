@@ -11,13 +11,16 @@ function Profile() {
     const [showDialog, setShowDialog] = useState(false);
     return (
         <div>
+            if(!user){
+                Navigate('/')
+            }
             <Navbar />
             <div className='mt-5 w-3/5 mx-auto'>
                 {/* ye pehla dibba hai. */}
                 <div className='border border-b-lime-950 p-2'>
                     <div className='flex justify-between items-center'>
                         <div className='w-24'>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" alt="" />
+                            <img src={user?.profilePhoto} alt="" />
                         </div>
                         <div>
                             <h3>{user?.name}</h3>

@@ -31,10 +31,11 @@ function Register() {
     if(input.file) formdata.append('file',input.file);
     try{
       setloading(true);
-      const res=await fetch(`http://localhost:8000/api/user/register`,{
-        method:POST,
-        body:formdata,
-      })
+      const res = await fetch(`http://localhost:8000/api/user/register`, {
+        method: 'POST',
+        body: formdata,
+        credentials: 'include' // if needed for cookies; otherwise remove
+      });      
       const response=await res.json();
       console.log(response);
     }
@@ -78,10 +79,10 @@ function Register() {
           <div className='flex gap-2 flex-wrap'>
             Applicant:<input className='p-1 rounded-sm bg-slate-100' type="radio" name="role"
                onChange={changeEventHandler}
-            value="applicant" />
+            value="Applicant" />
             Recruiter:<input className='p-1 rounded-sm bg-slate-100' type="radio" name="role" 
              onChange={changeEventHandler}
-            value="recruiter" />
+            value="Recruiter" />
           </div>
           <label>Profile</label>
           <input className='p-1 rounded-sm bg-slate-100' type="file" onChange={changeFilehandler} />

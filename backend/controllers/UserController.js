@@ -1,11 +1,22 @@
 import { User } from "../models/Usermodel.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 const salt=bcrypt.genSaltSync(10);
 export const register= async (req,res)=>{
     try{
         const {name,email,password,phonenumber,role}=req.body;
         // check if any of the field is missing
+
+
+        // yaha pe register krte time hmlog profile photo bhi le rhe hai
+        const file =req.file;
+        console.log(file);
+
+        // cloudinary me daalte hai
+         const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         if(!name || !email || !password || !phonenumber || !role){
             return res.status(404).json({
@@ -33,7 +44,8 @@ export const register= async (req,res)=>{
             email,
             password:hashedpassword,
             phonenumber,
-            role
+            role,
+            profilePhoto:cloudResponse.secure_url
         })
         return res.status(201).json({
             "message":"Congrats!! User Created Successfully!",
@@ -54,6 +66,7 @@ export const register= async (req,res)=>{
 export const login=async(req,res)=>{
     try{
         // if any of the field is missing 
+        console.log("lounda login kiya hai.!!!")
 
         const {email,password,role}=req.body;
         if(!email || !password || !role){
@@ -90,6 +103,7 @@ export const login=async(req,res)=>{
         // if all okay then we will create token
         console.log("JWT_SECRET->  ",process.env.JWT_SECRET)
         let token=jwt.sign({id:checkuser._id},process.env.JWT_SECRET,{expiresIn:'1h'});
+        console.log("token-->",token);
         return res.status(201).cookie('token',token).json({
             "message":"You are Successfully logged in!!!",
             checkuser,
@@ -127,7 +141,18 @@ export const logout=async(req,res)=>{
 export const updateprofile=async(req,res)=>{
         try{
             const {name,email,phonenumber,bio,skills}=req.body;
+            console.log(name);
+            console.log(email);
+            console.log(phonenumber);
+            console.log(bio);
+            console.log(skills);
             const file=req.file;
+            console.log(file)
+            // cloudinary aaega idhr.
+            const fileUri = getDataUri(file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
+
 
             // check whether person is logged in or not if not we will not allow them to update credentials
             // this req.id is propagated through middleware
@@ -142,6 +167,8 @@ export const updateprofile=async(req,res)=>{
                 phonenumber,
                 "profile.bio":bio,
                 "profile.skills":skillsArray,
+                "profile.resume":cloudResponse.secure_url,
+                "profile.resumename":file.originalname
             },
             {new:true}
         );
