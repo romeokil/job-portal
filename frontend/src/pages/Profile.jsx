@@ -3,10 +3,11 @@ import Navbar from '../components/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faMessage, faAddressBook } from "@fortawesome/free-regular-svg-icons"
 import Dialogbox from './Dialogbox.jsx'
-import { useSelector } from 'react-redux'
+import { useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 function Profile() {
     const user=useSelector((state)=>state.auth.user);
-    let skills = ['HTML', 'CSS', 'JAVSCRIPT', 'REACT', 'NODEJS']
+    const Navigate=useNavigate();
     const [showDialog, setShowDialog] = useState(false);
     return (
         <div>
@@ -49,7 +50,7 @@ function Profile() {
                     </div>
                     <div>
                         <h1>Resume</h1>
-                        <a href='www.youtube.com' target='_blank'>Rahul Kumar</a>
+                        <a href={user?.profile?.resume} target='_blank'>{user?.profile?.resumename}</a>
                     </div>
                 </div>
                 {/* ye second dibba hai. */}
