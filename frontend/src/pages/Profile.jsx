@@ -1,4 +1,4 @@
-import React,{useState,} from 'react'
+import React,{useState,useEffect} from 'react'
 import Navbar from '../components/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faMessage, faAddressBook } from "@fortawesome/free-regular-svg-icons"
@@ -9,11 +9,13 @@ function Profile() {
     const user=useSelector((state)=>state.auth.user);
     const Navigate=useNavigate();
     const [showDialog, setShowDialog] = useState(false);
+    useEffect(()=>{
+        if(!user){
+            Navigate('/');
+        }
+    },[user,Navigate])
     return (
         <div>
-            if(!user){
-                Navigate('/')
-            }
             <Navbar />
             <div className='mt-5 w-3/5 mx-auto'>
                 {/* ye pehla dibba hai. */}

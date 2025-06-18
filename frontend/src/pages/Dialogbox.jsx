@@ -1,41 +1,65 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState ,useEffect} from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { login } from '../redux/authslice.js';
 
 const ProfileDialog = ({ show, onClose }) => {
   const user=useSelector((state)=>state.auth.user);
+  const dispatch=useDispatch();
   console.log(user);
-  const [userdata,setuserdata]=useState({
-    name:user?.name,
-    email:user?.email,
-    number:user?.phonenumber,
-    bio:user?.profile?.bio,
-    skills:user?.profile?.skills,
-    resume:user?.profile?.resume
-  });
+  const [userdata,setuserdata]=useState('');
+  useEffect(() => {
+    if (user) {
+      setuserdata({
+        name: user.name || '',
+        email: user.email || '',
+        number: user.phonenumber || '',
+        bio: user.profile?.bio || '',
+        skills: user.profile?.skills || '',
+        // resume: user.profile?.resume || ''
+        file: user?.profile?.resume || ""
+      });
+    }
+  }, [user, show]);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    number: '',
-    bio: '',
-    skills: '',
-    resume: null,
-  });
 
   if (!show) return null;
 
   const handleChange = (e) => {
-    setuserdata({...userdata,[e.target.name]:e.target.value})
+    setuserdata({...userdata,[e.target.name]:e.target.value});
   };
 
-  const handlefileChange=(e)=>{
-    const file=e.target.file?.[0];
-    setuserdata({...userdata,file})
-  }
+   const handlefileChange= (e) => {
+        const file = e.target.files?.[0];
+        setuserdata({ ...userdata, file })
+    }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("after submitting the form the data we got!!")
     console.log(userdata);
+    const formData=new FormData();
+    formData.append("name",userdata.name);
+    formData.append("email",userdata.email);
+    formData.append("phonenumber",userdata.number);
+    formData.append("bio",userdata.bio);
+    formData.append("skills",userdata.skills);
+    if(userdata.file){
+      formData.append("file",userdata.file);
+    }
+    try{
+        const response=await fetch(`http://localhost:8000/api/user/profile/update`,{
+          method:'PUT',
+          body:formData,
+          credentials:'include'
+        })
+        const data=await response.json();
+        console.log(data);
+        dispatch(login(data.user))
+        alert("Congrats User updation Successfull!!")
+    }
+    catch(error){
+      console.log("Error while updating the user profile,",error);
+    }
     onClose(); // Close the dialog after updating
   };
 
@@ -94,7 +118,6 @@ const ProfileDialog = ({ show, onClose }) => {
           <input
             type="file"
             name="file"
-            value={userdata.file?.[0]}
             accept="application/pdf"
             className="w-full"
             onChange={handlefileChange}
