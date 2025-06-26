@@ -1,14 +1,25 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark } from "@fortawesome/free-regular-svg-icons"
-export default function Jobcard({job}) {
-    const jobId='fasldjffasdfsadf';
+export default function Jobcard({ job }) {
+    // const jobId='fasldjffasdfsadf';
+    const dayagoFunction = (mongoTime) => {
+        // console.log("mongoTime argument->", mongoTime);
+        const createdAt = new Date(mongoTime);
+        // console.log("createAt", createdAt);
+        const currentTime = new Date();
+        // console.log("currentTime", currentTime);
+        const timeDifference = currentTime - createdAt;
+        // console.log("timeDifference", timeDifference);
+        // console.log("timeDifference when divided", Math.floor(timeDifference / (1000 * 24 * 60 * 60)));
+        return Math.floor(timeDifference / (1000 * 24 * 60 * 60));
+    }
     return (
         <div>
             <div className='w-full rounded-md border-2 border-slate-300 shadow-lg shadow-slate-500/50 p-2'>
                 <div className='flex gap-2 justify-between'>
-                    <div>2 days ago</div>
+                    <div>{dayagoFunction(job?.createdAt) === 0 ? "Today" : `${dayagoFunction(job?.createdAt)} days ago`}</div>
                     <div><FontAwesomeIcon icon={faBookmark} /></div>
                 </div>
                 <div className='flex gap-1'>
