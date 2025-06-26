@@ -74,7 +74,7 @@ function Job() {
                         <Jobcard/>
                         <Jobcard/> */}
                         {Jobs.length<=0?<span>No Jobs Available.</span>:Jobs.map((job)=>{
-                            return <Jobcard job={job}/>
+                            return <Jobcard key={job?._id} job={job}/>
                         })}
 
                     </div>
