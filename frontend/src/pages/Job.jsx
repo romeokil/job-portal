@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Jobcard from "../components/Jobcard.jsx";
+import { useSelector } from "react-redux";
 function Job() {
+    const Jobs=useSelector((state)=>state.job.allJobs);
     const filterdata = [
         {
             filtertype: "Location",
@@ -65,12 +67,16 @@ function Job() {
                     {/* <h2 className="text-lg font-semibold">Filtered Jobs</h2>
                     <pre>{JSON.stringify(selectedFilters, null, 2)}</pre> */}
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-x-4 md:gap-y-4'>
+                        {/* <Jobcard/>
                         <Jobcard/>
                         <Jobcard/>
                         <Jobcard/>
                         <Jobcard/>
-                        <Jobcard/>
-                        <Jobcard/>
+                        <Jobcard/> */}
+                        {Jobs.length<=0?<span>No Jobs Available.</span>:Jobs.map((job)=>{
+                            return <Jobcard job={job}/>
+                        })}
+
                     </div>
                     
                 </div>

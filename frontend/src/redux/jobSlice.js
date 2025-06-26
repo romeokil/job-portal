@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const jobSlice=createSlice({
     name:"job",
-    intitalState:{
+    initialState:{
         allJobs:[]
     },
     reducers:{

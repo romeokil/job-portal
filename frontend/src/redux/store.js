@@ -1,5 +1,6 @@
 import { combineReducers,configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authslice.js"; // Import your slice reducer
+import jobReducer from "./jobSlice.js"
 import {persistReducer,persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
@@ -12,7 +13,10 @@ import storage from 'redux-persist/lib/storage'
 
 // ab redux-persist add kr diye hai.
 
-const rootReducer=combineReducers({auth:authReducer});
+const rootReducer=combineReducers({
+    auth:authReducer,
+    job:jobReducer
+});
 const persistConfig={
     key:'root',
     version:1, // otherwise it will default take -1 as a version
