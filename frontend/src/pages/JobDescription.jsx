@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 function JobDescription() {
+    const user=useSelector((state)=>state.auth.user);
     const solojob=useSelector((state)=>state.job.singleJob);
+    const initiallyApplied=solojob?.applications?.some(application=>application.applicant==user?._id);
+    console.log("initiallyApplied->",initiallyApplied)
     const dispatch=useDispatch();
     const param=useParams();
     const jobId=param.id;
@@ -22,8 +25,10 @@ function JobDescription() {
             }
         }
         getsingleJob();
-    },[jobId])
+    },[jobId,user?._id])
     const isApplied=false;
+    const isApply=solojob.applications.some(application=>application.applicant===user?._id);
+    console.log(isApply);
     return (
         <div className='w-3/4 mx-auto mt-8'>
             <div className='flex justify-between items-center'>
