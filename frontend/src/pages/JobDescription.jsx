@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { setsingleJob } from '../redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -6,8 +6,14 @@ import { useParams } from 'react-router-dom';
 function JobDescription() {
     const user=useSelector((state)=>state.auth.user);
     const solojob=useSelector((state)=>state.job.singleJob);
-    const initiallyApplied=solojob?.applications?.some(application=>application.applicant==user?._id);
+    solojob?.applications?.map((application)=>{
+        console.log(application.applicant);
+    })
+    console.log("user->id",user?._id);
+    const initiallyApplied=solojob?.applications?.some(application=>application.applicant==user?._id) || false;
     console.log("initiallyApplied->",initiallyApplied)
+    const [isApplied,setisApplied]=useState(initiallyApplied);
+    console.log("isApplied",isApplied);
     const dispatch=useDispatch();
     const param=useParams();
     const jobId=param.id;
@@ -20,15 +26,28 @@ function JobDescription() {
             })
             if(response.ok){
                 const data=await response.json();
+                setisApplied(data.job.applications.some(application=>application.applicant==user?._id));
                 console.log("singleJob hmlog get kr liye hai na",data)
                 dispatch(setsingleJob(data.job));
             }
         }
         getsingleJob();
     },[jobId,user?._id])
-    const isApplied=false;
-    const isApply=solojob.applications.some(application=>application.applicant===user?._id);
-    console.log(isApply);
+    // ye wale function me aaram se tm apply kr dega current job ko.
+    const updatejobHandler=async()=>{
+        const response=await fetch(`http://localhost:8000/api/application/applyjob/${jobId}`,{
+            method:'GET',
+            credentials:"include"
+        })
+        if(response.ok){
+            const data=await response.json();
+            setisApplied(true);
+            const updatedsingleJob={...solojob,applications:[...solojob.applications,{applicant:user?._id}]};
+            dispatch(setsingleJob(updatedsingleJob));
+            console.log(updatedsingleJob);
+            alert(`${data.message}`);
+        }
+    }
     return (
         <div className='w-3/4 mx-auto mt-8'>
             <div className='flex justify-between items-center'>
@@ -41,11 +60,12 @@ function JobDescription() {
                     </div>
                 </div>
                 <div>
-                    {!isApplied?(
-                        <button className='bg-blue-500 font-semibold text-lg text-white p-2 rounded-md'>Apply</button>
-                    ):(
-                        <button className='bg-slate-500 font-semibold text-lg text-white p-2 rounded-md'>Already Applied</button>
-                    )}
+                <button
+                onClick={isApplied ? null : updatejobHandler}
+                    disabled={isApplied}
+                    className={`rounded-lg p-2 ${isApplied ? 'bg-gray-600 cursor-not-allowed text-white' : 'bg-[#276fcc] hover:bg-[#5f32ad] text-black'}`}>
+                    {isApplied ? 'Already Applied' : 'Apply Now'}
+                </button>
                     
                 </div>
             </div>
