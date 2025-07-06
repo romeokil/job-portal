@@ -4,17 +4,18 @@ import { Company } from "../models/Companymodel.js";
 // new company registration
 export const registerCompany=async(req,res)=>{
     try{
-        const {name,description,location,logo,userId}=req.body;
-
+        console.log(req.body);
+        const {companyname}=req.body;
+        console.log(companyname)
         //Missing credentials
-        if(!name || !description || !location){
+        if(!companyname){
             return res.status(404).json({
                 message:"Sorry but Missing credentials!!",
                 success:false
             })
         }
         // if company is already is register with this given name
-        let company=await Company.findOne({name});
+        let company=await Company.findOne({companyname});
         if(company){
             return res.status(401).json({
                 message:"Company with the same name is already registered!!",
@@ -22,9 +23,7 @@ export const registerCompany=async(req,res)=>{
             })
         }
         let newCompany=await Company.create({
-            name,
-            description,
-            location,
+            name:companyname,
             userId:req.id
         })
         return res.status(201).json({
