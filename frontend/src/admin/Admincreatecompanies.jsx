@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
 import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { setsinglecompany} from '../redux/companyslice.js'
 
 function Admincreatecompanies() {
+    const dispatch=useDispatch();
     const [loading,setloading]=useState(false);
     const [companyname,setcompanyname]=useState('');
     const Navigate=useNavigate();
@@ -24,6 +27,7 @@ function Admincreatecompanies() {
                 const data=await response.json();
                 const registeredcompany=data.newCompany;
                 console.log(registeredcompany);
+                dispatch(setsinglecompany(registeredcompany))
                 Navigate(`/admin/companies/desc/${registeredcompany._id}`);
             }
         } catch (error) {
