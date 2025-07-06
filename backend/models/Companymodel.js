@@ -8,14 +8,12 @@ const CompanySchema=new mongoose.Schema({
     },
     description:{
         type:String,
-        requried:true
     },
     website:{
         type:String
     },
     location:{
         type:String,
-        requried:true,
     },
     logo:{
         type:String,
