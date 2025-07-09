@@ -1,4 +1,6 @@
 import { Company } from "../models/Companymodel.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 // new company register kr diye
 // new company registration
@@ -113,9 +115,12 @@ export const updatecompanybyid= async (req,res)=>{
         const file=req.file;
 
         // idhar cloudinary se data aayega
+        const fileUri=getDataUri(file);
+        const cloudResponse=await cloudinary.uploader.upload(fileUri.content);
+        const logo=cloudResponse.secure_url;
 
         const updatedcompany=await Company.findByIdAndUpdate(id,{
-            name,description,location,website
+            name,description,location,website,logo
         },
         {new:true}
         )
