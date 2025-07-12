@@ -26,7 +26,7 @@ function Admincompanies() {
                 <div className='flex justify-between items-center p-2 mb-3'>
                     <div>
                         <input 
-                        onClick={(e)=>setsearchinputbytext(e.target.value)}
+                        onChange={(e)=>setsearchinputbytext(e.target.value)}
                         className='p-1' 
                         type="text" 
                         placeholder="Filter by Name" />
