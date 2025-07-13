@@ -5,7 +5,7 @@ import Avatar from './Avatar.jsx';
 import { useSelector } from 'react-redux';
 
 function Navbar() {
-    const auth=useSelector((state)=>state.auth);
+    const user = useSelector((state) => state.auth.user);
     return (
         <>
             <div className='w-4/5 mx-auto mt-2'>
@@ -16,20 +16,33 @@ function Navbar() {
                     </div>
                     <div className='flex font-medium text-slate-500 text-lg sm:text-xl gap-4'>
                         <ul className='flex gap-1 sm:gap-2 p-2'>
-                            <li><Link to='/'>Home</Link></li>
-                            <li className='px-2'><Link to='/job'>Jobs</Link></li>
-                            <li><Link to='/browse'>Browse</Link></li>
+                            {user && user.role === "Recruiter" ?
+                                (
+                                    <>
+                                        <li><Link to='/admin/jobs'>Jobs</Link></li>
+                                        <li className='px-2'><Link to='/admin/companies'>Companies</Link></li>
+                                    </>
+                                ) :
+                                (
+                                    <>
+                                        <li><Link to='/'>Home</Link></li>
+                                        <li className='px-2'><Link to='/job'>Jobs</Link></li>
+                                        <li><Link to='/browse'>Browse</Link></li>
+                                    </>
+                                )
+
+                            }
                         </ul>
                         <div>
-                            {!auth.isAuthenticated?(
+                            {!user ? (
                                 <div className='flex flex-col sm:flex-row gap-1'>
                                     <Link to='/login' className='bg-blue-400 text-white p-2 rounded-md'>Login</Link>
                                     <Link to='/register' className='bg-red-400 text-white p-2 rounded-md'>Register</Link>
                                 </div>
-                            ):(
+                            ) : (
                                 <div className='flex gap-1 sm:gap-2'>
-                                    <Dropdown/>
-                                    <Avatar/>
+                                    <Dropdown />
+                                    <Avatar />
                                 </div>
                             )}
                         </div>
