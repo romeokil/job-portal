@@ -4,22 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons"
 import { useNavigate, useParams } from 'react-router-dom'
 import { setsinglecompany } from '../redux/companyslice.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 function Admincompaniesdesc() {
   const dispatch=useDispatch();
   const params = useParams();
   const companyid = params.id;
-  console.log(companyid)
-  const [companyname, setcompanyname] = useState('');
-  const [companydesc, setcompanydesc] = useState('');
-  const [companywebsite, setcompanywebsite] = useState('');
-  const [companylocation, setcompanylocation] = useState('');
-  const [companylogo, setcompanylogo] = useState('');
-  const Navigate = useNavigate();
-  const previousPage = () => {
-    Navigate('/admin/companies/create')
-  }
-  useEffect(() => {
+   useEffect(() => {
     const getcompanybyid=async()=>{
       try{
           const response=await fetch(`http://localhost:8000/api/company/getcompanybyid/${companyid}`,{
@@ -29,7 +19,7 @@ function Admincompaniesdesc() {
           if(response.ok){
             const data=await response.json();
             console.log(data.company);
-            setcompanyname(data.company.name);
+            dispatch(setsinglecompany(data.company));
           }
       }
       catch(error){
@@ -39,21 +29,49 @@ function Admincompaniesdesc() {
     getcompanybyid();
 
   }, [companyid])
+  const singleCompany=useSelector((store)=>store.company.singlecompany);
+  console.log(companyid);
+  const Navigate = useNavigate();
+  const previousPage = () => {
+    Navigate('/admin/companies/create')
+  }
+ 
+  const [input,setinput]=useState({
+    name:"",
+    description:"",
+    website:"",
+    location:"",
+    file:null
+  })
+
+   useEffect(()=>{
+    setinput({
+      name:singleCompany.name || "",
+      description:singleCompany.description || "",
+      website:singleCompany.website || "",
+      location:singleCompany.location || "",
+      file:singleCompany.logo || ""
+  })
+  },[singleCompany])
+
+  const changeEventHandler=(e)=>{
+    setinput({...input,[e.target.id]:e.target.value});
+  }
+  
+  const changeFileHandler=(e)=>{
+    setinput({...input,[e.target.id]:e.target.files?.[0]})
+  }
+  
   const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(companyname);
-    console.log(companydesc);
-    console.log(companywebsite);
-    console.log(companylocation);
-    console.log(companylogo)
-
+    console.log(input);
     const formdata=new FormData();
-    formdata.append('name',companyname);
-    formdata.append('description',companydesc);
-    formdata.append('website',companywebsite);
-    formdata.append('location',companylocation);
-    if(companylogo){
-      formdata.append('file',companylogo);
+    formdata.append('name',input.name);
+    formdata.append('description',input.description);
+    formdata.append('website',input.website);
+    formdata.append('location',input.location);
+    if(input.file){
+      formdata.append('file',input.file);
     }
     // console.log(formdata);
     for( let pair of formdata.entries()){
@@ -90,15 +108,15 @@ function Admincompaniesdesc() {
               </div>
               <form onSubmit={submitHandler} className='flex flex-col gap-2 p-2'>
                 <p>Company Name</p>
-                <input className='w-full p-1' value={companyname} onChange={(e) => setcompanyname(e.target.value)} type="text" placeholder="Enter Your Company Name" />
+                <input className='w-full p-1' id="name" value={input.name} onChange={changeEventHandler} type="text" placeholder="Enter Your Company Name" />
                 <p>Description</p>
-                <input className='w-full p-2' onChange={(e) => setcompanydesc(e.target.value)} type="text" placeholder="Enter Description about the Company" />
+                <input className='w-full p-2' id="description" value={input.description} onChange={changeEventHandler} type="text" placeholder="Enter Description about the Company" />
                 <p>Website</p>
-                <input className='w-full p-2' onChange={(e) => setcompanywebsite(e.target.value)} type="text" placeholder='Enter Your website link' />
+                <input className='w-full p-2' id="website" value={input.website} onChange={changeEventHandler} type="text" placeholder='Enter Your website link' />
                 <p>Location</p>
-                <input className='w-full p-2' onChange={(e) => setcompanylocation(e.target.value)} type='text' placeholder='Enter Your location' />
+                <input className='w-full p-2' id="location" value={input.location} onChange={changeEventHandler} type='text' placeholder='Enter Your location' />
                 <p>Logo</p>
-                <input onChange={(e) => setcompanylogo(e.target.files[0])} type="file" name="file" id="file" />
+                <input onChange={changeFileHandler} type="file" name="file" id="file" />
                 <button className='px-2 py-1 rounded-lg text-white bg-black mt-2'>Update Company</button>
               </form>
             </div>
