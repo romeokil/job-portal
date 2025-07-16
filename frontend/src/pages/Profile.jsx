@@ -3,9 +3,12 @@ import Navbar from '../components/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faMessage, faAddressBook } from "@fortawesome/free-regular-svg-icons"
 import Dialogbox from './Dialogbox.jsx'
-import { useSelector} from 'react-redux'
+import { setallappliedjobs } from '../redux/applicationslice.js'
+import AppliedjobsTable from './appliedjobsTable.jsx'
+import { useSelector,useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 function Profile() {
+    const dispatch=useDispatch();
     const user=useSelector((state)=>state.auth.user);
     const Navigate=useNavigate();
     const [showDialog, setShowDialog] = useState(false);
@@ -14,6 +17,27 @@ function Profile() {
             Navigate('/');
         }
     },[user,Navigate])
+
+    // ye useEffect hai ki tm kin kin jobs me apply kiye ho wo pata krna.
+    useEffect(()=>{
+        const getappliedjobs=async()=>{
+            try{
+                const response=await fetch(`http://localhost:8000/api/application/getappliedjobs`,{
+                    method:'GET',
+                    credentials:'include'
+                })
+                if(response.ok){
+                    let data=await response.json();
+                    dispatch(setallappliedjobs(data.application));
+                    // console.log(data.application);
+                }
+            }
+            catch(error){
+                console.log("Error while fetching all applied jobs");
+            }
+        }
+        getappliedjobs();
+    })
     return (
         <div>
             <Navbar />
@@ -61,38 +85,7 @@ function Profile() {
                 {/* ye second dibba hai. */}
                 <div className='mt-3'>
                     <h2 className='mb-2'>Applied Jobs</h2>
-                    <div className="overflow-x-auto w-full">
-                        <table className="min-w-full divide-y divide-gray-200 border border-gray-300 shadow-md rounded-lg">
-                            <thead className="bg-gray-100">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Date</th>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Job Role</th>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Company</th>
-                                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-200">
-                                <tr className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">17-01-2002</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">Backend Developer</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">Microsoft</td>
-                                    <td className="px-6 py-4 text-sm font-medium text-red-500 whitespace-nowrap">Rejected</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50 bg-gray-50">
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">19-02-2003</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">Frontend Developer</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">Google</td>
-                                    <td className="px-6 py-4 text-sm font-medium text-green-600 whitespace-nowrap">Selected</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">15-02-2004</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">DevOps Engineer</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">Facebook</td>
-                                    <td className="px-6 py-4 text-sm font-medium text-green-600 whitespace-nowrap">Selected</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <AppliedjobsTable/>
                 </div>
             </div>
         </div>
