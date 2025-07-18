@@ -37,7 +37,7 @@ function Navbar() {
                                     <>
                                         <li className='hover:text-violet-500'><Link to='/'>Home</Link></li>
                                         <li className='px-2 hover:text-violet-500'><Link to='/job'>Jobs</Link></li>
-                                        <li className='hover:text-violet-500'><Link to='/browse'>Browse</Link></li>
+                                        {/* <li className='hover:text-violet-500'><Link to='/browse'>Browse</Link></li> */}
                                     </>
                                 ):
                                 (
