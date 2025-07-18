@@ -2,19 +2,21 @@ import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAddressBook, faBarChart, faCalendar, faClock, faEye } from "@fortawesome/free-regular-svg-icons"
 import Navbar from '../components/Navbar'
+import { useSelector } from 'react-redux'
 
 export default function LandingPage() {
+    const isDark=useSelector((state)=>state.theme.isDark);
     return (
-        <div className='w-4/5 mx-auto m-2'>
+        <div>
             <Navbar />
             {/* hero section text */}
-            <div className="flex flex-col-reverse md:flex-row justify-around p-2 mt-4 gap-2">
+            <div className={`${isDark?'bg-blue-950':'bg-white'} flex flex-col-reverse md:flex-row justify-around p-5 gap-2`}>
                 {/* Hero Text Section */}
                 <div className="flex flex-wrap w-full md:w-2/5 gap-2">
-                    <h1 className="font-bold text-4xl md:text-6xl mt-6 md:mt-10">
+                    <h1 className={`${isDark?'text-white':'text-black'} font-bold text-4xl md:text-6xl mt-6 md:mt-10"`}>
                         Streamline Your <span className="text-violet-500 pl-2">Hiring Process</span>
                     </h1>
-                    <p className="text-slate-900 dark:text-slate-900 font-normal text-lg md:text-xl">
+                    <p className={`${isDark?'text-slate-300':'text-slate-900'} font-normal text-lg md:text-xl`}>
                         The complete job portal management system that connects top talent with leading companies. Manage applications, track candidates, and make better hiring decisions.
                     </p>
                 </div>
@@ -30,45 +32,45 @@ export default function LandingPage() {
             </div>
 
 
-            <div className='mt-10 p-4 gap-4'>
-                <h1 className="font-bold text-4xl md:text-6xl mt-6 md:mt-10 text-center">
-                        Everything you need to know<span className="text-violet-500 pl-2">Hire Better</span>
+            <div className={`${isDark?'bg-blue-950':'bg-white'} p-4 gap-4`}>
+                <h1 className={`${isDark?'text-white':'text-black'} font-bold text-4xl md:text-6xl mt-6 md:mt-10 text-center`}>
+                        Everything you need to know<span className="text-violet-500 p-2">Hire Better</span>
                     </h1>
-                    <p className="text-slate-900 dark:text-slate-900 font-normal text-lg md:text-xl pt-2 text-center">
+                    <p className={`${isDark?'text-slate-300':'text-slate-900'} mt-5 p-2 font-normal text-lg md:text-xl pt-2 text-center`}>
                         Comprehensive tools designed to make your hiring process more efficient , transport and successful.
                     </p>
             </div>
             {/* cards section  */}
-            <div className='grid gap-2 grid-cols-1 md:grid-cols-2 mt-8'>
+            <div className={`${isDark?'bg-blue-950':'bg-white'} grid gap-3 grid-cols-1 md:grid-cols-2 p-6`}>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faClock} /></p>
-                    <h1 className='text-xl font-semibold'>Candidate Management </h1>
-                    <p className='mb-4'>Organize and track candidates throughout the hiring process with advanced filtering and search capabilities.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Candidate Management </h1>
+                    <p className='text-slate-400 mb-4'>Organize and track candidates throughout the hiring process with advanced filtering and search capabilities.</p>
                 </div>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faCalendar} /></p>
-                    <h1 className='text-xl font-semibold'>Interview Scheduling </h1>
-                    <p className='mb-4'>Streamline interview scheduling with automated calendar integration and candidate notifications.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Interview Scheduling </h1>
+                    <p className='text-slate-400 mb-4'>Streamline interview scheduling with automated calendar integration and candidate notifications.</p>
                 </div>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faBarChart} /></p>
-                    <h1 className='text-xl font-semibold'>Analytics Dashboard</h1>
-                    <p className='mb-4'>Get insights into your hiring process with comprehensive analytics and performance metrics.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Analytics Dashboard</h1>
+                    <p className='text-slate-400 mb-4'>Get insights into your hiring process with comprehensive analytics and performance metrics.</p>
                 </div>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faAddressBook} /></p>
-                    <h1 className='text-xl font-semibold'>Resume Database</h1>
-                    <p className='mb-4'>Build and search through a comprehensive database of candidate resumes and profiles.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Resume Database</h1>
+                    <p className='text-slate-400 mb-4'>Build and search through a comprehensive database of candidate resumes and profiles.</p>
                 </div>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faEye} /></p>
-                    <h1 className='text-xl font-semibold'>Smart Job Matching</h1>
-                    <p className='mb-4'>AI-powered job matching that connects the right candidates with the right opportunities.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Smart Job Matching</h1>
+                    <p className='text-slate-400 mb-4'>AI-powered job matching that connects the right candidates with the right opportunities.</p>
                 </div>
                 <div className='flex flex-col gap-2 p-2 rounded-xl shadow-lg'>
                     <p><FontAwesomeIcon className='border-1 border-slate-500 rounded-md bg-indigo-700 text-white p-2' icon={faClock} /></p>
-                    <h1 className='text-xl font-semibold'>Secure & Compliant </h1>
-                    <p className='mb-4'>Enterprise-grade security with GDPR compliance and data protection measures.</p>
+                    <h1 className={`${isDark?'text-white':'text-black'}`}>Secure & Compliant </h1>
+                    <p className='text-slate-400 mb-4'>Enterprise-grade security with GDPR compliance and data protection measures.</p>
                 </div>
             </div>
             {/* Banner Part */}
