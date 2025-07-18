@@ -48,7 +48,7 @@ function Job() {
     return (
         <div>
             <Navbar />
-            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full mx-auto flex`}>
+            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-full sm:h-screen mx-auto flex`}>
                 {/* Sidebar with Filters */}
                 <div className={`${isDark?'text-white':'text-black'} w-2/5 sm:w-1/5 p-2 border-r border-gray-300`}>
                     <h1 className="text-xl font-semibold mb-4">Filter Jobs</h1>
