@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { setsinglecompany } from '../redux/companyslice.js'
 import { useDispatch,useSelector } from 'react-redux'
 function Admincompaniesdesc() {
+  const isDark=useSelector((state)=>state.theme.isDark);
   const dispatch=useDispatch();
   const params = useParams();
   const companyid = params.id;
@@ -33,7 +34,7 @@ function Admincompaniesdesc() {
   console.log(companyid);
   const Navigate = useNavigate();
   const previousPage = () => {
-    Navigate('/admin/companies/create')
+    Navigate('/admin/companies')
   }
  
   const [input,setinput]=useState({
@@ -97,25 +98,25 @@ function Admincompaniesdesc() {
     <div>
       <>
         <Navbar />
-        <div className='w-full h-screen flex justify-center items-center'>
+        <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-screen flex justify-center items-center`}>
           <div className='w-4/5 mx-auto'>
             <div>
               <div className='flex gap-2 mb-2'>
                 <button onClick={previousPage} className='bg-black px-2 py-1 text-white rounded-lg'>
                   <FontAwesomeIcon className='pr-1' icon={faArrowAltCircleLeft} />
                   Back</button>
-                <h2 className='font-semibold text-medium text-lg'>Company Setup</h2>
+                <h2 className={`${isDark?'text-white':'text-black'} font-semibold text-medium text-lg`}>Company Setup</h2>
               </div>
               <form onSubmit={submitHandler} className='flex flex-col gap-2 p-2'>
-                <p>Company Name</p>
+                <p className={`${isDark?'text-white':'text-black'}`}>Company Name</p>
                 <input className='w-full p-1' id="name" value={input.name} onChange={changeEventHandler} type="text" placeholder="Enter Your Company Name" />
-                <p>Description</p>
+                <p className={`${isDark?'text-white':'text-black'}`}>Description</p>
                 <input className='w-full p-2' id="description" value={input.description} onChange={changeEventHandler} type="text" placeholder="Enter Description about the Company" />
-                <p>Website</p>
+                <p className={`${isDark?'text-white':'text-black'}`}>Website</p>
                 <input className='w-full p-2' id="website" value={input.website} onChange={changeEventHandler} type="text" placeholder='Enter Your website link' />
-                <p>Location</p>
+                <p className={`${isDark?'text-white':'text-black'}`}>Location</p>
                 <input className='w-full p-2' id="location" value={input.location} onChange={changeEventHandler} type='text' placeholder='Enter Your location' />
-                <p>Logo</p>
+                <p className={`${isDark?'text-white':'text-black'}`}>Logo</p>
                 <input onChange={changeFileHandler} type="file" name="file" id="file" />
                 <button className='px-2 py-1 rounded-lg text-white bg-black mt-2'>Update Company</button>
               </form>
