@@ -15,7 +15,7 @@ export default function Avatar() {
                 <img
                 alt=""
                 src={user.profilePhoto}
-                className="inline-block size-10 rounded-full ring-2 ring-white"
+                className="inline-block size-10 rounded-full"
               />
                 
             }
