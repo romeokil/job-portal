@@ -9,6 +9,7 @@ import usegetallCompanies from '../hooks/usegetallCompanies.jsx'
 import {setsearchcompanybytext} from '../redux/companyslice.js'
 
 function Admincompanies() {
+    const isDark=useSelector((state)=>state.theme.isDark);
     usegetallCompanies();
     const [searchinputbytext,setsearchinputbytext]=useState("");
     const dispatch=useDispatch();
@@ -22,12 +23,12 @@ function Admincompanies() {
     return (
         <>
             <Navbar />
-            <div className='w-4/5 mx-auto mt-5'>
+            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-screen mx-auto p-5`}>
                 <div className='flex justify-between items-center p-2 mb-3'>
                     <div>
                         <input 
                         onChange={(e)=>setsearchinputbytext(e.target.value)}
-                        className='p-1' 
+                        className='p-1 bg-slate-200' 
                         type="text" 
                         placeholder="Filter by Name" />
                     </div>
