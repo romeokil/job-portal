@@ -43,6 +43,7 @@ export default function Table() {
                         </>
                     ) : (
                         <div className={`${isDark ? 'bg-slate-900' : 'bg-white'} overflow-x-auto w-full`}>
+                            
                             <table className="min-w-full divide-y divide-gray-200 border border-gray-300 shadow-md rounded-lg">
                                 <thead className="bg-gray-100">
                                     <tr>
