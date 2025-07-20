@@ -1,7 +1,9 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { useSelector } from 'react-redux';
 function Register() {
+  const isDark=useSelector((state)=>state.theme.isDark);
   const [loading,setloading]=useState(false);
   const [input,setinput]=useState({
     name:"",
@@ -49,34 +51,34 @@ function Register() {
   return (
     <div>
       <Navbar />
-      <div className='w-full h-full flex items-center justify-center'>
+      <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-screen flex items-center justify-center`}>
         <form onSubmit={onSubmitHandler} className='flex flex-col gap-2 p-3 w-3/5'>
-          <h1 className='font-semibold text-center text-black text-2xl underline'>Register</h1>
-          <label>Full Name</label>
+          <h1 className={`${isDark?'text-white':'text-black'} font-semibold text-center text-2xl underline`}>Register</h1>
+          <label className={`${isDark?'text-white':'text-black'}`} >Full Name</label>
           <input className='p-1 rounded-sm bg-slate-100'
             name="name"
             value={input.name}
             onChange={changeEventHandler}
            type="text" placeholder="rahul" />
-          <label>Email</label>
+          <label className={`${isDark?'text-white':'text-black'}`}>Email</label>
           <input className='p-1 rounded-sm bg-slate-100' 
              name="email"
              value={input.email}
              onChange={changeEventHandler}
           type="text" placeholder="rahul@gmail.com" />
-          <label>Phone Number</label>
+          <label className={`${isDark?'text-white':'text-black'}`}>Phone Number</label>
           <input className='p-1 rounded-sm bg-slate-100'
              name="phonenumber"
              value={input.phonenumber}
              onChange={changeEventHandler}
           type="text" placeholder="989987898" />
-          <label>Password</label>
+          <label className={`${isDark?'text-white':'text-black'}`}>Password</label>
           <input className='p-1 rounded-sm bg-slate-100'
              name="password"
              value={input.password}
              onChange={changeEventHandler}
           type="password" placeholder="password" />
-          <div className='flex gap-2 flex-wrap'>
+          <div className={`flex gap-2 flex-wrap ${isDark?'text-white':'text-black'}`}>
             Applicant:<input className='p-1 rounded-sm bg-slate-100' type="radio" name="role"
                onChange={changeEventHandler}
             value="Applicant" />
@@ -84,10 +86,10 @@ function Register() {
              onChange={changeEventHandler}
             value="Recruiter" />
           </div>
-          <label>Profile</label>
+          <label className={`${isDark?'text-white':'text-black'}`}>Profile</label>
           <input className='p-1 rounded-sm bg-slate-100' type="file" onChange={changeFilehandler} />
           <button className='bg-black text-white p-1 rounded-md mt-1'> Signup</button>
-          <span>Already have an account ? <Link to='/login' className='text-slate-600 hover:text-blue-900 hover:text-lg hover:font-semibold'>Login</Link></span>
+          <span className={`${isDark?'text-white':'text-black'}`}>Already have an account ? <Link to='/login' className='text-slate-600 hover:text-blue-900 hover:text-lg hover:font-semibold'>Login</Link></span>
         </form>
       </div>
     </div>

@@ -18,6 +18,8 @@ export const verifytoken= async (req,res,next)=>{
                 success:false
             })
         }
+        console.log(req.id);
+        console.log(decoded.id)
         req.id=decoded.id;
         console.log("next route tk pahuch gy middlware crossed")
         next();

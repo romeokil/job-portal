@@ -113,8 +113,8 @@ export const updatecompanybyid= async (req,res)=>{
         const {id}=req.params;
         const {name,description,location,website}=req.body;
         const file=req.file;
-
-        // idhar cloudinary se data aayega
+        console.log("file updatedcompanybyid",file);
+        // // idhar cloudinary se data aayega
         const fileUri=getDataUri(file);
         const cloudResponse=await cloudinary.uploader.upload(fileUri.content);
         const logo=cloudResponse.secure_url;

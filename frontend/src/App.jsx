@@ -10,11 +10,15 @@ import Adminjobs from "./admin/Adminjobs.jsx"
 import Admincompanies from "./admin/Admincompanies.jsx"
 import Admincreatecompanies from "./admin/Admincreatecompanies.jsx"
 import Admincompaniesdesc from "./admin/Admincompaniesdesc.jsx"
+import Admincreatejobs from "./admin/Admincreatejobs.jsx"
+import Applicant from "./admin/Applicant.jsx"
+import LandingPage from "./pages/LandingPage.jsx"
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path='/landing' element={<LandingPage/>}></Route>
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
@@ -26,7 +30,9 @@ function App() {
         <Route path='/admin/jobs' element={<Adminjobs/>}></Route>
         <Route path='/admin/companies' element={<Admincompanies/>}></Route>
         <Route path='/admin/companies/create' element={<Admincreatecompanies/>}></Route>
-        <Route path='/admin/companies/desc' element={<Admincompaniesdesc/>}></Route>
+        <Route path='/admin/jobs/create' element={<Admincreatejobs/>}></Route>
+        <Route path='/admin/jobs/:id/applicants' element={<Applicant/>}></Route>
+        <Route path='/admin/companies/desc/:id' element={<Admincompaniesdesc/>}></Route>
       </Routes>
 
     </>
