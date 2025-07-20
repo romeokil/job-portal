@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 function ApplicantsTable() {
+    const isDark=useSelector((state)=>state.theme.isDark);
     const allapplications = useSelector((state) => state.application.allapplications);
     console.log(allapplications);
     console.log(allapplications.length);
@@ -29,7 +30,7 @@ function ApplicantsTable() {
         }
     }
     return (
-        <div className="overflow-x-auto w-full">
+        <div className={`${isDark?'bg-slate-900':'bg-white'} overflow-x-auto w-full h-screen`}>
             <table className="min-w-full divide-y divide-gray-200 border border-gray-300 shadow-md rounded-lg">
                 <thead className="bg-gray-100">
                     <tr>
@@ -45,18 +46,18 @@ function ApplicantsTable() {
                 {allapplications.map((application) => {
                     return <tbody className="divide-y divide-gray-200">
                         <tr className="hover:bg-gray-50">
-                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{application.applicant.name}</td>
-                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{application.applicant.email}</td>
-                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{application.applicant.phonenumber}</td>
+                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.name}</td>
+                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.email}</td>
+                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.phonenumber}</td>
                             {
                                 application.applicant.profile.resume ?
-                                    <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                                    <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>
                                         <a href={application.applicant.profile.resume} target="_blank">{application.applicant.profile.resumename}</a>
-                                    </td> : <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">NA</td>
+                                    </td> : <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>NA</td>
                             }
 
-                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{application.applicant.createdAt.split('T')[0]}</td>
-                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.createdAt.split('T')[0]}</td>
+                            <td className={`px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>
                                 <Menu as="div" className="relative inline-block text-left">
                                     <div>
                                         <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">

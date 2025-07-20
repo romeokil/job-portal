@@ -3,8 +3,9 @@ import Navbar from '../components/Navbar'
 import ApplicantsTable from './ApplicantsTable'
 import { useParams } from 'react-router-dom'
 import { setallapplications } from '../redux/applicationslice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 export default function Applicant() {
+    const isDark=useSelector((state)=>state.theme.isDark);
     const [applicationlength,setapplicationlength]=useState(0);
     const params=useParams();
     const jobId=params.id;
@@ -34,8 +35,8 @@ export default function Applicant() {
     return (
         <>
             <Navbar />
-            <div className='w-4/5 mx-auto mt-5'>
-                <h1 className='m-4 font-semibold text-xl '>Applicants ({applicationlength})</h1>
+            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full mx-auto p-5`}>
+                <h1 className={`m-4 font-semibold ${isDark?'text-white':'text-black'} text-xl `}>Applicants ({applicationlength})</h1>
                 <ApplicantsTable />
             </div>
         </>
