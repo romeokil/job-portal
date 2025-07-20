@@ -3,6 +3,7 @@ import authReducer from "./authslice.js"; // Import your slice reducer
 import jobReducer from "./jobSlice.js"
 import companyReducer from './companyslice.js'
 import applicationReducer from './applicationslice.js'
+import themeReducer from './theme.js'
 import {persistReducer,persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
@@ -19,7 +20,8 @@ const rootReducer=combineReducers({
     auth:authReducer,
     job:jobReducer,
     company:companyReducer,
-    application:applicationReducer
+    application:applicationReducer,
+    theme:themeReducer
 });
 const persistConfig={
     key:'root',
