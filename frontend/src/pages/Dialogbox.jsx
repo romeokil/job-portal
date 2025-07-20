@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { login } from '../redux/authslice.js';
 
 const ProfileDialog = ({ show, onClose }) => {
+  const isDark=useSelector((state)=>state.theme.isDark);
   const user=useSelector((state)=>state.auth.user);
   const dispatch=useDispatch();
   console.log(user);
@@ -65,7 +66,7 @@ const ProfileDialog = ({ show, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-[400px] relative">
+      <div className={`${isDark?'bg-slate-900':'bg-white'} p-6 rounded-xl shadow-lg w-[400px] relative`}>
         <button
           onClick={onClose}
           className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl font-bold"
@@ -73,7 +74,7 @@ const ProfileDialog = ({ show, onClose }) => {
           &times;
         </button>
 
-        <h2 className="text-xl font-semibold mb-4">Update Profile</h2>
+        <h2 className={`text-xl font-semibold mb-4 ${isDark?'text-white':'text-black'}`}>Update Profile</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
