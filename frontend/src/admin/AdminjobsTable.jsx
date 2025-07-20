@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faPencil,faEye } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 export default function AdminTable() {
     const Navigate=useNavigate();
+    const isDark=useSelector((state)=>state.theme.isDark);
     // useEffect call krege filtered company laane ke liye searchcompanybytext jo global variable bnae hai.
     const companies = useSelector((state) => state.company.allcompany || []);
     const allAdminJobs = useSelector((state)=> state.job.alladminJobs || []);
@@ -45,7 +46,7 @@ export default function AdminTable() {
                         Sorry But You Haven't registered For this company.
                     </>
                 ) : (
-                        <div className="overflow-x-auto w-full">
+                        <div className={`${isDark?'bg-slate-900':'bg-white'} overflow-x-auto w-full`}>
                             <table className="min-w-full divide-y divide-gray-200 border border-gray-300 shadow-md rounded-lg">
                                 <thead className="bg-gray-100">
                                     <tr>
@@ -53,15 +54,18 @@ export default function AdminTable() {
                                         <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Role</th>
                                         <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Date</th>
                                         <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Action</th>
+                                        <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">See Applicants</th>
+
                                     </tr>
                                 </thead>
                                 {filteredAdminjobs.map((adminjob) => {
                                     return <tbody className="divide-y divide-gray-200">
-                                        <tr className="hover:bg-gray-50">
-                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{adminjob?.company?.name}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{adminjob?.title}</td>
-                                            <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">{adminjob?.createdAt.split('T')[0]}</td>
-                                            <td onClick={()=>{Navigate(`/admin/companies/desc/${adminjob?._id}`)}}className="px-6 py-4 text-sm font-medium text-red-500 whitespace-nowrap"><FontAwesomeIcon icon={faPencil} /><p>Edit</p></td>
+                                        <tr className={`hover:bg-gray-500`}>
+                                            <td className={`px-6 py-4 text-sm ${isDark?'text-white':'text-black'} whitespace-nowrap`}>{adminjob?.company?.name}</td>
+                                            <td className={`px-6 py-4 text-sm ${isDark?'text-white':'text-black'} whitespace-nowrap`}>{adminjob?.title}</td>
+                                            <td className={`px-6 py-4 text-sm ${isDark?'text-white':'text-black'} whitespace-nowrap`}>{adminjob?.createdAt.split('T')[0]}</td>
+                                            <td onClick={()=>{Navigate(`/admin/companies/desc/${adminjob?._id}`)}}className="px-6 py-4 text-sm font-medium text-yellow-500 whitespace-nowrap"><FontAwesomeIcon icon={faPencil} /><p>Edit</p></td>
+                                            <td onClick={()=>{Navigate(`/admin/jobs/${adminjob?._id}/applicants`)}}className="px-6 py-4 text-sm font-medium text-green-500 whitespace-nowrap"><FontAwesomeIcon icon={faEye} /><p>Applicants</p></td>
                                         </tr>
                                     </tbody>
                                 })}

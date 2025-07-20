@@ -10,6 +10,7 @@ import AdminTable from './AdminjobsTable.jsx'
 
 function Adminjobs() {
     usegetallAdminJobs();
+    const isDark=useSelector((state)=>state.theme.isDark);
     const [searchinputbytext,setsearchinputbytext]=useState("");
     const dispatch=useDispatch();
     useEffect(()=>{
@@ -22,8 +23,8 @@ function Adminjobs() {
     return (
         <>
             <Navbar />
-            <div className='w-4/5 mx-auto mt-5'>
-                <div className='flex justify-between items-center p-2 mb-3'>
+            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-screen mx-auto p-5`}>
+                <div className='flex justify-between items-center p-3'>
                     <div>
                         <input 
                         onChange={(e)=>setsearchinputbytext(e.target.value)}
