@@ -13,6 +13,8 @@ import Admincompaniesdesc from "./admin/Admincompaniesdesc.jsx"
 import Admincreatejobs from "./admin/Admincreatejobs.jsx"
 import Applicant from "./admin/Applicant.jsx"
 import LandingPage from "./pages/LandingPage.jsx"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
         <Route path='/admin/jobs/:id/applicants' element={<Applicant/>}></Route>
         <Route path='/admin/companies/desc/:id' element={<Admincompaniesdesc/>}></Route>
       </Routes>
+      <ToastContainer/>
 
     </>
   )
