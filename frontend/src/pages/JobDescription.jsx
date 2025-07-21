@@ -3,6 +3,8 @@ import { setsingleJob } from '../redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+
 
 function JobDescription() {
     const isDark=useSelector((state)=>state.theme.isDark);
@@ -37,18 +39,58 @@ function JobDescription() {
     }, [jobId, user?._id])
     // ye wale function me aaram se tm apply kr dega current job ko.
     const updatejobHandler = async () => {
-        const response = await fetch(`http://localhost:8000/api/application/applyjob/${jobId}`, {
+        try{
+            const response = await fetch(`http://localhost:8000/api/application/applyjob/${jobId}`, {
             method: 'GET',
             credentials: "include"
         })
+        const data = await response.json();
         if (response.ok) {
-            const data = await response.json();
             setisApplied(true);
             const updatedsingleJob = { ...solojob, applications: [...solojob.applications, { applicant: user?._id }] };
             dispatch(setsingleJob(updatedsingleJob));
             console.log(updatedsingleJob);
-            alert(`${data.message}`);
+            toast.success(`🦄 ${data.message}`, {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: `${isDark?'dark':'light'}`,
+                      transition: Bounce,
+                    });
         }
+        else{
+            toast.warn(`🦄 ${response.message}` , {
+                      position: "top-right",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: `${isDark?'dark':'light'}`,
+                      transition: Bounce,
+                    })
+        }
+        }
+        catch(error){
+            toast.error('🦄 Error while registering the user', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: `${isDark?'dark':'light'}`,
+                    transition: Bounce,
+                  })
+            console.log("Error while applying to Job!!");
+        }
+        
     }
     return (
         <div>
