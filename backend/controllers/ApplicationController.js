@@ -37,7 +37,7 @@ export const applyjob=async(req,res)=>{
             job.applications.push(newapplication._id);
             await job.save();
             return res.status(201).json({
-                message: "New Application Created!!",
+                message: "You have successfully Applied for this Job!!",
                 newapplication,
                 success: true
             })
