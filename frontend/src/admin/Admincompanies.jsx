@@ -28,7 +28,7 @@ function Admincompanies() {
                     <div>
                         <input 
                         onChange={(e)=>setsearchinputbytext(e.target.value)}
-                        className='p-1 bg-slate-200' 
+                        className='p-1 bg-slate-200'
                         type="text" 
                         placeholder="Filter by Name" />
                     </div>

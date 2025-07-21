@@ -84,14 +84,49 @@ function Admincompaniesdesc() {
         body:formdata,
         credentials:'include'
       });
+      const data=await response.json();
       if(response.ok){
-        const data=await response.json();
         console.log(data.updatedcompany);
         dispatch(setsinglecompany(data.updatedcompany));
+        toast.success(`🦄 ${data.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: `${isDark?'dark':'light'}`,
+          transition: Bounce,
+        });
+      }
+      else{
+        toast.warn(`🦄 ${data.message}` , {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: `${isDark?'dark':'light'}`,
+          transition: Bounce,
+        })
       }
     }
     catch(error){
       console.log("Error while updating the company by id",error);
+      toast.error('🦄 Error while registering the user', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: `${isDark?'dark':'light'}`,
+        transition: Bounce,
+      })
     }
   }
   return (
