@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 
 function Admincreatejobs() {
     const companies = useSelector((state) => state.company.allcompany);
-    const Navigate=useNavigate();
+    const Navigate = useNavigate();
     const [input, setinput] = useState({
         title: "",
         description: "",
@@ -40,15 +40,50 @@ function Admincreatejobs() {
                 body: JSON.stringify(input),
                 credentials: 'include'
             })
+            let data = await response.json();
             if (response.ok) {
-                let data = await response.json();
-                alert('Job created Successfully!!!');
+                // alert('Job created Successfully!!!');
+                toast.success(`🦄 ${data.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: `${isDark ? 'dark' : 'light'}`,
+                    transition: Bounce,
+                });
                 console.log(data.newJob)
                 Navigate('/admin/jobs');
             }
+            else {
+                toast.warn(`🦄 ${response.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: `${isDark ? 'dark' : 'light'}`,
+                    transition: Bounce,
+                })
+            }
         }
         catch (error) {
-            alert('Error while creating the job from Admin')
+            // alert('Error while creating the job from Admin')
+            toast.error('🦄 Error while registering the user', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: `${isDark ? 'dark' : 'light'}`,
+                transition: Bounce,
+            })
             console.log("Error while creating the job from Admin")
         }
     }
@@ -140,12 +175,12 @@ function Admincreatejobs() {
                                             onChange={changeEventHandler}
                                             className="w-full p-1 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         >
-                                        <option value="">Select Company</option>
-                                        {
-                                        companies.map((company)=>{
-                                            return <option key={company._id} value={company._id}>{company.name}</option>
-                                        })
-                                        }
+                                            <option value="">Select Company</option>
+                                            {
+                                                companies.map((company) => {
+                                                    return <option key={company._id} value={company._id}>{company.name}</option>
+                                                })
+                                            }
                                         </select>
                                     </>
 

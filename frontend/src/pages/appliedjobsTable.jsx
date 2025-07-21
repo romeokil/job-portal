@@ -18,7 +18,7 @@ export default function appliedjobsTable() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                     {allappliedjobs.map((appliedjob) => {
-                        return <tr className="hover:bg-gray-50">
+                        return <tr className="hover:bg-gray-500">
                             <td className={` ${isDark?'text-white':'text-black'} px-6 py-4 text-sm whitespace-nowrap`}>{appliedjob.createdAt.split('T')[0]}</td>
                             <td className={` ${isDark?'text-white':'text-black'} px-6 py-4 text-sm whitespace-nowrap`}>{appliedjob.job.title}</td>
                             <td className={` ${isDark?'text-white':'text-black'} px-6 py-4 text-sm whitespace-nowrap`}>{appliedjob.job.company.name}</td>

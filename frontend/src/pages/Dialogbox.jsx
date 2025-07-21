@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { login } from '../redux/authslice.js';
-
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 const ProfileDialog = ({ show, onClose }) => {
   const isDark=useSelector((state)=>state.theme.isDark);
   const user=useSelector((state)=>state.auth.user);
@@ -55,10 +55,46 @@ const ProfileDialog = ({ show, onClose }) => {
         })
         const data=await response.json();
         console.log(data);
-        dispatch(login(data.user))
-        alert("Congrats User updation Successfull!!")
+        if(response.ok){
+          dispatch(login(data.user))
+          toast.success(`🦄 ${data.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: `${isDark?'dark':'light'}`,
+          transition: Bounce,
+        });
+        }
+        else{
+          toast.warn(`🦄 ${data.message}` , {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: `${isDark?'dark':'light'}`,
+          transition: Bounce,
+        })
+        }
     }
     catch(error){
+      toast.error('🦄 Error while registering the user', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: `${isDark?'dark':'light'}`,
+        transition: Bounce,
+      })
       console.log("Error while updating the user profile,",error);
     }
     onClose(); // Close the dialog after updating
