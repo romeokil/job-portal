@@ -38,7 +38,7 @@ function Profile() {
             }
         }
         getappliedjobs();
-    })
+    },[])
     return (
         <div>
             <Navbar />
@@ -46,8 +46,8 @@ function Profile() {
                 {/* ye pehla dibba hai. */}
                 <div className='border border-b-lime-950 p-2'>
                     <div className='flex justify-between items-center'>
-                        <div className='w-24'>
-                            <img className='w-18 rounded-full' src={user?.profilePhoto} alt="" />
+                        <div className='w-20'>
+                            <img className='w-20 h-10 rounded-full' src={user?.profilePhoto} alt="" />
                         </div>
                         <div>
                             <h3 className={`${isDark?'text-white':'text-black'} p-2`}>{user?.name}</h3>

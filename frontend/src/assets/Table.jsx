@@ -36,7 +36,7 @@ export default function Table() {
     return (
         <>
             {
-                filteredcompanies.length <= 0 ?
+                !filteredcompanies && filteredcompanies.length <= 0 ?
                     (
                         <>
                             Sorry But You Haven't registered For this company.
@@ -58,7 +58,7 @@ export default function Table() {
                                     return <tbody className="divide-y divide-gray-200">
                                         <tr className={`hover:bg-gray-500`}>
                                             <td className={`px-6 py-4 text-sm ${isDark ? 'text-white' : 'text-black'} whitespace-nowrap`}>
-                                                <img className='w-10 rounded-full' src={company?.logo} alt="This is pic" srcset="" />
+                                                <img className='w-10 h-10 rounded-full' src={company?.logo} alt="This is pic" srcset="" />
                                             </td>
                                             <td className={`px-6 py-4 text-sm ${isDark ? 'text-white' : 'text-black'} whitespace-nowrap`}>{company?.name}</td>
                                             <td className={`px-6 py-4 text-sm ${isDark ? 'text-white' : 'text-black'} whitespace-nowrap`}>{company?.createdAt.split('T')[0]}</td>

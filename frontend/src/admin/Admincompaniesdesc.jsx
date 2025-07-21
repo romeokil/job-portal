@@ -5,6 +5,7 @@ import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons"
 import { useNavigate, useParams } from 'react-router-dom'
 import { setsinglecompany } from '../redux/companyslice.js'
 import { useDispatch,useSelector } from 'react-redux'
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 function Admincompaniesdesc() {
   const isDark=useSelector((state)=>state.theme.isDark);
   const dispatch=useDispatch();

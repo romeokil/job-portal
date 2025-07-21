@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { login } from '../redux/authslice.js';
+import { setuser } from '../redux/authslice.js';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 const ProfileDialog = ({ show, onClose }) => {
   const isDark=useSelector((state)=>state.theme.isDark);
@@ -56,7 +56,7 @@ const ProfileDialog = ({ show, onClose }) => {
         const data=await response.json();
         console.log(data);
         if(response.ok){
-          dispatch(login(data.user))
+          dispatch(setuser(data.user))
           toast.success(`🦄 ${data.message}`, {
           position: "top-right",
           autoClose: 5000,

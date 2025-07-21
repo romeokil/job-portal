@@ -2,8 +2,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 function ApplicantsTable() {
-    const isDark=useSelector((state)=>state.theme.isDark);
+    const isDark = useSelector((state) => state.theme.isDark);
     const allapplications = useSelector((state) => state.application.allapplications);
     console.log(allapplications);
     console.log(allapplications.length);
@@ -21,16 +22,50 @@ function ApplicantsTable() {
             if (response.ok) {
                 let data = await response.json();
                 console.log("Application updated successfully!", data.updatedapplication);
-                alert(data.message)
+                toast.success(`🦄 ${data.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: `${isDark ? 'dark' : 'light'}`,
+                    transition: Bounce,
+                });
+            }
+            else {
+                toast.warn(`🦄 ${response.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: `${isDark ? 'dark' : 'light'}`,
+                    transition: Bounce,
+                })
             }
         }
         catch (error) {
             console.log("Error while updating application");
             // alert('Application updation Failed!!')
+            toast.error('🦄 Error while registering the user', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: `${isDark ? 'dark' : 'light'}`,
+                transition: Bounce,
+            })
         }
     }
     return (
-        <div className={`${isDark?'bg-slate-900':'bg-white'} overflow-x-auto w-full h-screen`}>
+        <div className={`${isDark ? 'bg-slate-900' : 'bg-white'} overflow-x-auto w-full h-screen`}>
             <table className="min-w-full divide-y divide-gray-200 border border-gray-300 shadow-md rounded-lg">
                 <thead className="bg-gray-100">
                     <tr>
@@ -43,20 +78,20 @@ function ApplicantsTable() {
 
                     </tr>
                 </thead>
-                {allapplications.map((application) => {
+                {allapplications && allapplications.map((application) => {
                     return <tbody className="divide-y divide-gray-200">
                         <tr className="hover:bg-gray-50">
-                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.name}</td>
-                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.email}</td>
-                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.phonenumber}</td>
+                            <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.name}</td>
+                            <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.email}</td>
+                            <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.phonenumber}</td>
                             {
-                                application.applicant.profile.resume ?
-                                    <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>
-                                        <a href={application.applicant.profile.resume} target="_blank">{application.applicant.profile.resumename}</a>
-                                    </td> : <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>NA</td>
+                                application?.applicant?.profile?.resume ?
+                                    <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>
+                                        <a href={application?.applicant?.profile?.resume} target="_blank">{application?.applicant?.profile?.resumename}</a>
+                                    </td> : <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>NA</td>
                             }
 
-                            <td className={`${isDark?'text-white':'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.createdAt.split('T')[0]}</td>
+                            <td className={`${isDark ? 'text-white' : 'text-black'} px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>{application.applicant.createdAt.split('T')[0]}</td>
                             <td className={`px-6 py-4 text-sm text-gray-600 whitespace-nowrap`}>
                                 <Menu as="div" className="relative inline-block text-left">
                                     <div>

@@ -19,6 +19,9 @@ function Home() {
         if (user && user?.role === 'Recruiter') {
             Navigate('/admin/companies');
         }
+        if(user && user?.role==='Applicant'){
+            Navigate('/');
+        }
     }, [user])
     return (
         <>

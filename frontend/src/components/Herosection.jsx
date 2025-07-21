@@ -27,7 +27,7 @@ function Herosection() {
         <div>
             <p className={`${isDark?'text-white':'text-black'} text-center text-5xl font-semibold`}>Search, Apply &</p>
             <p className={`${isDark?'text-white':'text-black'} text-center text-5xl font-semibold`}>Get Your <span className='text-violet-500'>Dream Jobs</span></p>
-            <p className={`text-center m-6 font-medium ${isDark?'text-white':'text-black'} `}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, ex.</p>
+            <p className={`text-center m-6 font-medium ${isDark?'text-white':'text-black'} `}>Unlock Your Future—Where Talent Meets Opportunity, One Click at a Time.</p>
             <div className='flex justify-center items-center mt-4'>
                   <input onChange={(e)=>{setsearchinput(e.target.value)}} className='p-2 rounded-lg bg-slate-100 w-3/5' placeholder='Frontend, Backend' type="search" name="" id="" />
                   <button onClick={handleSearch} className='py-2 px-3 rounded-r-xl bg-violet-500 text-white'>Search</button>

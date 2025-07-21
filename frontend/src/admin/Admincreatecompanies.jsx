@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { setsinglecompany } from '../redux/companyslice.js'
-
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 function Admincreatecompanies() {
     const isDark = useSelector((state) => state.theme.isDark);
     const dispatch = useDispatch();
@@ -89,7 +89,6 @@ function Admincreatecompanies() {
                     <button className={`${isDark ? 'text-white' : 'text-black'} p-2 font-medium`} onClick={backtoadmin}>Cancel</button>
                     <button className='text-white bg-black p-2 font-medium rounded-lg' onClick={registercompany}>Continue</button>
                 </div>
-
             </div>
 
         </>

@@ -40,7 +40,7 @@ export default function AdminTable() {
     return (
         <>
             {
-                filteredAdminjobs.length <= 0 ?
+                !filteredAdminjobs || filteredAdminjobs.length <= 0 ?
                 (
                     <>
                         Sorry But You Haven't registered For this company.

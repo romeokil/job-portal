@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar.jsx'
-import { login } from '../redux/authslice.js'
+import { setuser } from '../redux/authslice.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 function Login() {
@@ -44,7 +44,7 @@ function Login() {
           theme: `${isDark ? 'dark' : 'light'}`,
           transition: Bounce,
         });
-        dispatch(login(data.checkuser));
+        dispatch(setuser(data.checkuser));
         Navigate('/')
       }
       else {

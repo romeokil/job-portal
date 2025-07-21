@@ -16,7 +16,7 @@ function LatestJob() {
           Jobs.length <= 0 ? <span>No Latest Job available.
           </span> : <>
             {
-              Jobs.map(job => {
+              Jobs.slice(0,6).map(job => {
                 return <div>
                   <div className={`w-full rounded-md border-2 border-slate-300 shadow-lg ${isDark?'shadow-blue-700/50':'shadow-slate-500/50'} p-2`}>
                     <div className='flex gap-1'>

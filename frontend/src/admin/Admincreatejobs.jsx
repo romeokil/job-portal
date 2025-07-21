@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar'
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+
 
 function Admincreatejobs() {
     const companies = useSelector((state) => state.company.allcompany);
+    const isDark=useSelector((state)=>state.theme.isDark);
     const Navigate = useNavigate();
     const [input, setinput] = useState({
         title: "",
@@ -90,11 +93,11 @@ function Admincreatejobs() {
     return (
         <div>
             <Navbar />
-            <div className='mt-10 w-full h-full flex items-center justify-center'>
+            <div className={`${isDark?'bg-slate-900':'bg-white'} w-full h-screen flex items-center justify-center`}>
                 <form onSubmit={submitHandler} className='w-4/5 md:w-3/5 border-2 border-slate-200 shadow-xl rounded-md p-2'>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 p-3'>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Title</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Title</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 value={input.title}
                                 onChange={changeEventHandler}
@@ -102,7 +105,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="rahul" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Description</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Description</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="description"
                                 value={input.description}
@@ -110,7 +113,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="This is a good company" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Requirements</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Requirements</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="requirements"
                                 value={input.requirements}
@@ -118,7 +121,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="Html,React,Node" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Salary</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Salary</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="salary"
                                 value={input.salary}
@@ -126,7 +129,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="100000" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Location</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Location</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="location"
                                 value={input.value}
@@ -134,7 +137,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="Mumbai,Bengaluru" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label htmlFor="jobType" className="block mb-1 text-sm font-medium text-gray-700">Job Type</label>
+                            <label htmlFor="jobType" className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Job Type</label>
                             <select
                                 id="jobType"
                                 value={input.jobType}
@@ -149,7 +152,7 @@ function Admincreatejobs() {
                             </select>
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">Experience Level</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Experience Level</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="experience"
                                 value={input.experience}
@@ -157,7 +160,7 @@ function Admincreatejobs() {
                                 type="text" placeholder="1,2" />
                         </div>
                         <div className='flex flex-wrap gap-2 justify-between items-center'>
-                            <label className="block mb-1 text-sm font-medium text-gray-700">No of Positions</label>
+                            <label className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>No of Positions</label>
                             <input className='p-1 rounded-md bg-slate-100'
                                 name="position"
                                 value={input.position}
@@ -166,9 +169,9 @@ function Admincreatejobs() {
                         </div>
                         <div className='flex flex-wrap gap-1 justify-between items-center'>
                             {
-                                companies.length > 0 && (
+                                companies && companies.length > 0 && (
                                     <>
-                                        <label htmlFor="jobType" className="block mb-1 text-sm font-medium text-gray-700">Company</label>
+                                        <label htmlFor="companyId" className={`${isDark?'text-white':'text-black'} block mb-1 text-sm font-medium text-gray-700`}>Company</label>
                                         <select
                                             id="companyId"
                                             name="companyId"
@@ -190,13 +193,13 @@ function Admincreatejobs() {
                     </div>
                     <button className='bg-black text-white p-1 rounded-md mt-1 w-2/3 block mx-auto my-2'> Signup</button>
                     {
-                        companies.length <= 0 ? (
+                        companies && companies.length <= 0 ? (
                             <>
                                 <p className='text-center text-red-600 font-bold text-md'>Sorry!! You Need to Register Company First</p>
                             </>
                         ) : (
                             <>
-                                <p className='text-center text-green-600 font-bold text-md'>No you have enough Companies you can post Job</p>
+                                <p className='text-center text-green-600 font-bold text-md'>Yes!! have enough Companies you can post Job</p>
                             </>
                         )
                     }
