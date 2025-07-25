@@ -119,12 +119,12 @@ function JobDescription() {
                 <hr />
                 <div className='mt-2'>
                     <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Role:<span className='pl-1 font-normal'>{solojob?.title}</span></h2>
-                    <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Location:<span className='pl-1 font-normal'>{solojob.location}</span></h2>
+                    <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Location:<span className='pl-1 font-normal'>{solojob?.location}</span></h2>
                     <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Description:<span className='pl-1 font-normal'>{solojob?.description}</span></h2>
                     <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Experience:<span className='pl-1 font-normal'>{solojob?.experience} yrs</span></h2>
                     <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Salary:<span className='pl-1 font-normal'>{solojob?.salary} LPA</span></h2>
                     <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Total Applicant:<span className='pl-1 font-normal'>{solojob?.applications?.length}</span></h2>
-                    <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Posted Date:<span className='pl-1 font-normal'>{solojob.createdAt.split('T')[0]}</span></h2>
+                    <h2 className={`font-bold text-base ${isDark?'text-white':'text-black'}`}>Posted Date:<span className='pl-1 font-normal'>{solojob?.createdAt?.split('T')[0]}</span></h2>
                 </div>
             </div>
         </div>
