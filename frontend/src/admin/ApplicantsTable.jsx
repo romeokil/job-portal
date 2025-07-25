@@ -11,7 +11,7 @@ function ApplicantsTable() {
     const shortlistingstatus = ["accepted", "rejected"];
     const statusHandler = async (status, id) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/application/updatestatus/${id}`, {
+            const response = await fetch(`https://job-portal-6x2z.onrender.com/api/application/updatestatus/${id}`, {
                 method: 'POST',
                 headers: {
                     'content-Type': 'application/json',

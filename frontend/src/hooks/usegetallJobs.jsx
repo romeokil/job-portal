@@ -7,7 +7,7 @@ const usegetallJobs= () => {
     useEffect(()=>{
         const fetchallJobs= async ()=>{
         try{
-            const response=await fetch(`http://localhost:8000/api/jobs/getalljobs`,{
+            const response=await fetch(`https://job-portal-6x2z.onrender.com/api/jobs/getalljobs`,{
             method:'GET',
             credentials:'include'
             })

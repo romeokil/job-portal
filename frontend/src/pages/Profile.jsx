@@ -23,7 +23,7 @@ function Profile() {
     useEffect(()=>{
         const getappliedjobs=async()=>{
             try{
-                const response=await fetch(`http://localhost:8000/api/application/getappliedjobs`,{
+                const response=await fetch(`https://job-portal-6x2z.onrender.com/api/application/getappliedjobs`,{
                     method:'GET',
                     credentials:'include'
                 })

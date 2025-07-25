@@ -15,7 +15,7 @@ export default function Applicant() {
         const fetchallApplicant=async()=>{
             console.log("andr useeffect ke fetchallapplicant call ho gy")
             try{
-                let response =await fetch(`http://localhost:8000/api/application/getapplicant/${jobId}`,{
+                let response =await fetch(`https://job-portal-6x2z.onrender.com/api/application/getapplicant/${jobId}`,{
                 method:'GET',
                 credentials:'include'
             })

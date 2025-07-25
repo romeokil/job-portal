@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault();
     console.log("login kr rhe hai input print", input);
     try {
-      const response = await fetch(`http://localhost:8000/api/user/login`, {
+      const response = await fetch(`https://job-portal-6x2z.onrender.com/api/user/login`, {
         method: 'POST',
         body: JSON.stringify(input),
         headers: {

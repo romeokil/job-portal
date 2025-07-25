@@ -34,7 +34,7 @@ function Register() {
     if (input.file) formdata.append('file', input.file);
     try {
       setloading(true);
-      const res = await fetch(`http://localhost:8000/api/user/register`, {
+      const res = await fetch(`https://job-portal-6x2z.onrender.com/api/user/register`, {
         method: 'POST',
         body: formdata,
         credentials: 'include' // if needed for cookies; otherwise remove

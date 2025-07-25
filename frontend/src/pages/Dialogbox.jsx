@@ -48,7 +48,7 @@ const ProfileDialog = ({ show, onClose }) => {
       formData.append("file",userdata.file);
     }
     try{
-        const response=await fetch(`http://localhost:8000/api/user/profile/update`,{
+        const response=await fetch(`https://job-portal-6x2z.onrender.com/api/user/profile/update`,{
           method:'PUT',
           body:formData,
           credentials:'include'

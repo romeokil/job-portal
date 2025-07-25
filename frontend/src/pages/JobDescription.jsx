@@ -24,7 +24,7 @@ function JobDescription() {
     // ye hmlog backend se pata krege ki ye job me apply kiya hai ki ni.
     useEffect(() => {
         const getsingleJob = async () => {
-            const response = await fetch(`http://localhost:8000/api/jobs/getjobbyid/${jobId}`, {
+            const response = await fetch(`https://job-portal-6x2z.onrender.com/api/jobs/getjobbyid/${jobId}`, {
                 method: 'GET',
                 credentials: 'include'
             })
@@ -40,7 +40,7 @@ function JobDescription() {
     // ye wale function me aaram se tm apply kr dega current job ko.
     const updatejobHandler = async () => {
         try{
-            const response = await fetch(`http://localhost:8000/api/application/applyjob/${jobId}`, {
+            const response = await fetch(`https://job-portal-6x2z.onrender.com/api/application/applyjob/${jobId}`, {
             method: 'GET',
             credentials: "include"
         })

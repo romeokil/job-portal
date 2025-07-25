@@ -35,7 +35,7 @@ function Admincreatejobs() {
         console.log(input.requirements);
         console.log(input.companyId);
         try {
-            const response = await fetch(`http://localhost:8000/api/jobs/createjob`, {
+            const response = await fetch(`https://job-portal-6x2z.onrender.com/api/jobs/createjob`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

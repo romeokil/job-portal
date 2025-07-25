@@ -7,7 +7,7 @@ const usegetallAdminJobs= () => {
     useEffect(()=>{
         const fetchallAdminJobs= async ()=>{
         try{
-            const response=await fetch(`http://localhost:8000/api/jobs/getadminjob`,{
+            const response=await fetch(`https://job-portal-6x2z.onrender.com/api/jobs/getadminjob`,{
             method:'GET',
             credentials:'include'
             })

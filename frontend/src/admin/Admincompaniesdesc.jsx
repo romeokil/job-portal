@@ -14,7 +14,7 @@ function Admincompaniesdesc() {
    useEffect(() => {
     const getcompanybyid=async()=>{
       try{
-          const response=await fetch(`http://localhost:8000/api/company/getcompanybyid/${companyid}`,{
+          const response=await fetch(`https://job-portal-6x2z.onrender.com/api/company/getcompanybyid/${companyid}`,{
             method:'GET',
             credentials:'include'
           })
@@ -80,7 +80,7 @@ function Admincompaniesdesc() {
       console.log(pair[0]+" : "+pair[1]);
     }
     try{
-      const response=await fetch(`http://localhost:8000/api/company/updatecompanybyid/${companyid}`,{
+      const response=await fetch(`https://job-portal-6x2z.onrender.com/updatecompanybyid/${companyid}`,{
         method:'PUT',
         body:formdata,
         credentials:'include'

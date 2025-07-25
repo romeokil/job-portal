@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000
 const _dirname=path.resolve();
 console.log(_dirname);
 const corsOption = {
-    origin: 'http://localhost:5173',
+    origin: 'https://job-portal-6x2z.onrender.com',
     credentials: true
 }
 app.use(express.json());

@@ -7,7 +7,7 @@ const usegetallCompanies=()=>{
         const getallcompanies= async ()=>{
             try{
                 dispatch(setloading(true));
-                const response=await fetch(`http://localhost:8000/api/company/getcompany`,{
+                const response=await fetch(`https://job-portal-6x2z.onrender.com/api/company/getcompany`,{
                     method:'GET',
                     credentials:'include'
                 })

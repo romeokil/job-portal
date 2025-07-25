@@ -16,7 +16,7 @@ function Admincreatecompanies() {
     const registercompany = async () => {
         try {
             setloading(true);
-            const response = await fetch('http://localhost:8000/api/company/register', {
+            const response = await fetch('https://job-portal-6x2z.onrender.com/api/company/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/JSON'
