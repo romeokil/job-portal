@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 
-
 function JobDescription() {
+    const param = useParams();
+    const jobId = param.id;
     const isDark=useSelector((state)=>state.theme.isDark);
     const user = useSelector((state) => state.auth.user);
     const solojob = useSelector((state) => state.job.singleJob);
@@ -19,8 +20,6 @@ function JobDescription() {
     const [isApplied, setisApplied] = useState(initiallyApplied);
     console.log("isApplied", isApplied);
     const dispatch = useDispatch();
-    const param = useParams();
-    const jobId = param.id;
     // ye hmlog backend se pata krege ki ye job me apply kiya hai ki ni.
     useEffect(() => {
         const getsingleJob = async () => {
